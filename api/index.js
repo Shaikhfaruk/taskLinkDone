@@ -16,14 +16,22 @@ app.post("/", (req, res) => {
       error: "name or number missing",
     });
   }
-  const newUser = new user({
-    name,
-    number,
-  });
-  newUser.save().then(() => {
-    res.status(201).json({
-      message: "user added successfully",
-    });
+  user.findOne({ name: name }, (err, data) => {
+    if (err) {
+      return res.status(401).json({
+        error: "name or number missing",
+      });
+    } else {
+      const newUser = new user({
+        name,
+        number,
+      });
+      newUser.save().then(() => {
+        res.status(201).json({
+          message: "user added successfully",
+        });
+      });
+    }
   });
 });
 

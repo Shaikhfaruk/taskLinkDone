@@ -25,6 +25,9 @@ function App() {
     if (res.status === 400) {
       alert("name or number missing");
     }
+    if (res.status === 401) {
+      alert("name already exits");
+    }
     const data = await res.json();
   };
 
